@@ -6,8 +6,8 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     private int score;
-
-
+    public Collider2D spawnTrigger;
+    public AudioSource audioPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +28,8 @@ public class CollisionCheck : MonoBehaviour
         if (collision.gameObject.tag == "Star")
         {
             UpdateScore(1);
-            
-            collision.gameObject.SetActive(false);
+            SetStarPosition(collision.transform);
+            //collision.gameObject.SetActive(false);
 
         }
         
@@ -38,8 +38,9 @@ public class CollisionCheck : MonoBehaviour
         if (collision.gameObject.tag == "Bonus")
         {
             UpdateScore(10);
-
-            collision.gameObject.SetActive(false);
+            SetStarPosition(collision.transform);
+            //collision.gameObject.SetActive(false);
+            audioPlayer.Play();
 
         }
 
@@ -58,7 +59,14 @@ public class CollisionCheck : MonoBehaviour
     {
         return score;
     }
-      
-   
+
+    public void SetStarPosition(Transform starTransform)
+    {
+        float horizontalPosition = Random.Range(spawnTrigger.bounds.min.x, spawnTrigger.bounds.max.x);
+        float verticalPosition = Random.Range(spawnTrigger.bounds.min.y, spawnTrigger.bounds.max.y);
+
+        starTransform.position = new Vector2(horizontalPosition, verticalPosition);
+        starTransform.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
 }
 

@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(transform.up * -1 * speed * Time.deltaTime);
         }
 
-        if (collisionCheck.GetScore()==5)
+        if (collisionCheck.GetScore()>=5)
         {
             speed = 9.0f;
         }
@@ -52,11 +52,21 @@ public class PlayerMovement : MonoBehaviour
             speed = 11.0f;
         }
 
-        if (collisionCheck.GetScore() > 10)
+        if (collisionCheck.GetScore() > 15)
         {
-            speed = 15.0f;
+            speed = 13.0f;
+        }
+
+        if (collisionCheck.GetScore() > 50)
+        {
+            speed = 16.0f;
         }
 
 
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

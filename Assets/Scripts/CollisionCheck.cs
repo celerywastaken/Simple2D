@@ -68,5 +68,6 @@ public class CollisionCheck : MonoBehaviour
         starTransform.position = new Vector2(horizontalPosition, verticalPosition);
         starTransform.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
+    
 }
 
